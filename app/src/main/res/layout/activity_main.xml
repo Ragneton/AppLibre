@@ -3,43 +3,60 @@
     android:id="@+id/layoutPrincipal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Título: arriba del todo -->
     <TextView
         android:id="@+id/textoTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="POKEDEX DE TIPOS POKEMON" />
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="POKEDEX DE TIPOS POKEMON"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/textoEditableNombre"
+    <!-- Formulario: ocupa el resto y se centra -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Nombre del pokemon"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:text="" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="90dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/listaTipos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/tipos"
-        android:layout_marginBottom="16dp" />
+        <EditText
+            android:id="@+id/textoEditableNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Nombre del pokemon"
+            android:inputType="text"
+            android:minHeight="48dp" />
 
-    <Button
-        android:id="@+id/botonPokedex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pulsa aqui para ver" />
+        <Spinner
+            android:id="@+id/listaTipos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:entries="@array/tipos"
+            android:spinnerMode="dropdown"
+            android:dropDownHeight="15dp" />
 
-    <Button
-        android:id="@+id/botonFondo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pulsa aqui para cambiar el fondo" />
+        <Button
+            android:id="@+id/botonPokedex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="Ver Pokédex" />
+
+        <Button
+            android:id="@+id/botonFondo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cambiar fondo" />
+
+    </LinearLayout>
 
 </LinearLayout>
