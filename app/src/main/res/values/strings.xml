@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">AppLibre</string>
+
+    <!-- Estos son los elementos del spinner -->
+    <string-array name="tipos">
+        <item>Normal</item>
+        <item>Fuego</item>
+        <item>Agua</item>
+        <item>Planta</item>
+        <item>Eléctrico</item>
+        <item>Hielo</item>
+        <item>Lucha</item>
+        <item>Veneno</item>
+        <item>Tierra</item>
+        <item>Volador</item>
+        <item>Psíquico</item>
+        <item>Bicho</item>
+        <item>Roca</item>
+        <item>Fantasma</item>
+        <item>Dragón</item>
+    </string-array>
+</resources>

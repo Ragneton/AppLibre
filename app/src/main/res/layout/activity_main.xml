@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutPrincipal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textoTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="POKEDEX DE TIPOS POKEMON" />
+
+    <EditText
+        android:id="@+id/textoEditableNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre del pokemon"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:text="" />
+
+    <Spinner
+        android:id="@+id/listaTipos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/tipos"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/botonPokedex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pulsa aqui para ver" />
+
+    <Button
+        android:id="@+id/botonFondo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pulsa aqui para cambiar el fondo" />
+
+</LinearLayout>
