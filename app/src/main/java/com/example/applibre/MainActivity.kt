@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.jvm.java
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         val btnPokedex = findViewById<Button>(R.id.botonPokedex)
         val btnFondo = findViewById<Button>(R.id.botonFondo)
         val layoutPrincipal = findViewById<LinearLayout>(R.id.layoutPrincipal)
+        val btnHistorial = findViewById<Button>(R.id.botonHistorial)
 
         val prefs = getSharedPreferences("Nombres", MODE_PRIVATE)
 
@@ -35,6 +37,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 prefs.edit().putString("Nombre_guardado", nombre).apply()
 
+                Pokedex.pokemons.add(Pokemon(nombre, tipo))
+
                 val intent = Intent(this, SecondActivity::class.java)
                 intent.putExtra("Nombre", nombre)
                 intent.putExtra("Tipo", tipo)
@@ -47,6 +51,10 @@ class MainActivity : AppCompatActivity() {
             val fondo = androidx.core.content.ContextCompat.getDrawable(this, R.drawable.primera_gen)
             fondo?.alpha = 20        // 0 = invisible, 255 = opaca
             layoutPrincipal.background = fondo
+        }
+
+        btnHistorial.setOnClickListener {
+            startActivity(Intent(this, HistorialActivity::class.java))
         }
     }
 }

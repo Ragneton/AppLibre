@@ -52,6 +52,13 @@
             android:text="Ver Pokédex" />
 
         <Button
+            android:id="@+id/botonHistorial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="Historial Pokédex" />
+
+        <Button
             android:id="@+id/botonFondo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
