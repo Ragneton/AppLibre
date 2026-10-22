@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         btnFondo.setOnClickListener {
             //Esto hace que la imagen del fondo se pueda oscurecer o hacer transparente segun el parametro que le meta
             val fondo = androidx.core.content.ContextCompat.getDrawable(this, R.drawable.primera_gen)
-            fondo?.alpha = 40          // 0 = invisible, 255 = opaca
+            fondo?.alpha = 20        // 0 = invisible, 255 = opaca
             layoutPrincipal.background = fondo
         }
     }
