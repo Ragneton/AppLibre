@@ -4,6 +4,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -112,6 +113,14 @@ class SecondActivity : AppCompatActivity() {
         botonVolver.setOnClickListener {
             finish()
         }
+
+        //Para hacer que la imagen del fondo sea mas translucida
+        val layoutSecond = findViewById<LinearLayout>(R.id.layoutSecond)
+
+        val fondo = androidx.core.content.ContextCompat.getDrawable(this, R.drawable.primera_gen)?.mutate()
+        fondo?.alpha = 40        // 0 = invisible, 255 = opaca
+        layoutSecond.background = fondo
+
     }
 
     override fun onDestroy() {

@@ -19,8 +19,6 @@ class MainActivity : AppCompatActivity() {
         val editNombre = findViewById<EditText>(R.id.textoEditableNombre)
         val listaTipos = findViewById<Spinner>(R.id.listaTipos)
         val btnPokedex = findViewById<Button>(R.id.botonPokedex)
-        val btnFondo = findViewById<Button>(R.id.botonFondo)
-        val layoutPrincipal = findViewById<LinearLayout>(R.id.layoutPrincipal)
         val btnHistorial = findViewById<Button>(R.id.botonHistorial)
 
         val prefs = getSharedPreferences("Nombres", MODE_PRIVATE)
@@ -37,20 +35,13 @@ class MainActivity : AppCompatActivity() {
             } else {
                 prefs.edit().putString("Nombre_guardado", nombre).apply()
 
-                Pokedex.pokemons.add(Pokemon(nombre, tipo))
+                Pokedex.pokemons.add(Pokemon(nombre, tipo, imagenDelTipo(tipo)))
 
                 val intent = Intent(this, SecondActivity::class.java)
                 intent.putExtra("Nombre", nombre)
                 intent.putExtra("Tipo", tipo)
                 startActivity(intent)
             }
-        }
-
-        btnFondo.setOnClickListener {
-            //Esto hace que la imagen del fondo se pueda oscurecer o hacer transparente segun el parametro que le meta
-            val fondo = androidx.core.content.ContextCompat.getDrawable(this, R.drawable.primera_gen)
-            fondo?.alpha = 20        // 0 = invisible, 255 = opaca
-            layoutPrincipal.background = fondo
         }
 
         btnHistorial.setOnClickListener {

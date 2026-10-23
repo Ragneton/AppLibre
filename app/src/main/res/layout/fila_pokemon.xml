@@ -5,6 +5,14 @@
     android:orientation="horizontal"
     android:padding="12dp">
 
+    <ImageView
+        android:id="@+id/imagenFila"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Icono del tipo"
+        android:scaleType="fitCenter" />
+
     <TextView
         android:id="@+id/textoNombreFila"
         android:layout_width="0dp"
