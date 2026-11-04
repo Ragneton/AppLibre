@@ -8,11 +8,11 @@ import androidx.room.Query
 @Dao
 interface PokeDAO {
     @Insert
-    suspend fun insertar(nota: NotaPok)
+    suspend fun insertar(pokemon: PokemonEntity)
 
     @Query("SELECT * FROM pokemons ORDER BY id DESC")
-    suspend fun obtenerTodas(): List<NotaPok>
+    suspend fun obtenerTodas(): List<PokemonEntity>
 
     @Delete
-    suspend fun borrar(nota: NotaPok)
+    suspend fun borrar(pokemon: PokemonEntity)
 }
