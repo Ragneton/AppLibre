@@ -8,6 +8,7 @@ data class PokemonEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val nombre: String,
+    val habilidad: String,
     val tipo: String
 )
 

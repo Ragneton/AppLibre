@@ -22,8 +22,9 @@ class SecondActivity : AppCompatActivity() {
 
         val nombrePok = intent.getStringExtra("Nombre") ?: ""
         val tipoPok = intent.getStringExtra("Tipo")
+        val habilidadPok = intent.getStringExtra("Habilidad") ?: ""
 
-        textoResultado.text = "El pokemon $nombrePok es de tipo $tipoPok"
+        textoResultado.text = "El pokemon $nombrePok es de tipo $tipoPok y su habilidad es $habilidadPok"
 
         val sonidoId: Int
         when {

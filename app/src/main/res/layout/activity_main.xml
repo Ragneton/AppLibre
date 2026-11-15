@@ -26,6 +26,15 @@
             android:inputType="text"
             android:minHeight="48dp" />
 
+        <EditText
+            android:id="@+id/textoEditableHabilidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Habilidad (ej. Impactrueno)"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
         <Spinner
             android:id="@+id/listaTipos"
             android:layout_width="match_parent"
