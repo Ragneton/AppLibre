@@ -8,6 +8,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.applibre.network.RetrofitClient
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +48,18 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("Tipo", tipo)
                 intent.putExtra("Habilidad", habilidad)
                 startActivity(intent)
+            }
+        }
+
+        lifecycleScope.launch {
+            try {
+                val respuesta = RetrofitClient.api.obtenerPokemons(20,0)
+
+                for (pokemon in respuesta.results) {
+                    println(pokemon.name)
+                }
+            } catch (e: Exception) {
+                println("Error al conectar: ${e.message}")
             }
         }
 
