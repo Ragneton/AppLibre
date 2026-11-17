@@ -54,4 +54,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, HistorialActivity::class.java))
         }
     }
+
 }

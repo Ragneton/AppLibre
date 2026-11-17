@@ -59,4 +59,13 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     ksp("androidx.room:room-compiler:2.8.5")
+
+    // Retrofit: realizar peticiones a la API
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+
+    // Gson: convertir el JSON en objetos Kotlin
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
+    // Glide: cargar imágenes desde Internet
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }
