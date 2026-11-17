@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         val listaTipos = findViewById<Spinner>(R.id.listaTipos)
         val btnPokedex = findViewById<Button>(R.id.botonPokedex)
         val btnHistorial = findViewById<Button>(R.id.botonHistorial)
+        val btnExplorar = findViewById<Button>(R.id.botonExplorarPokedex)
 
         val dao = AppDatabase.obtener(this).pokemonDao()
 
@@ -65,6 +66,10 @@ class MainActivity : AppCompatActivity() {
 
         btnHistorial.setOnClickListener {
             startActivity(Intent(this, HistorialActivity::class.java))
+        }
+
+        btnExplorar.setOnClickListener {
+            startActivity(Intent(this, PokedexActivity::class.java))
         }
     }
 

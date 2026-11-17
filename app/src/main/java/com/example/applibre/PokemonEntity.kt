@@ -11,6 +11,3 @@ data class PokemonEntity(
     val habilidad: String,
     val tipo: String
 )
-
-
-

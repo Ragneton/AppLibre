@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Permiso de conexion a internet -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -32,6 +32,10 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".HistorialActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".PokedexActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>

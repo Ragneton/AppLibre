@@ -28,7 +28,6 @@ class HistorialAdapter(
         val pokemon = pokemons[position]
         holder.textoNombre.text = pokemon.nombre
         holder.textoHabilidad.text = "Habilidad: ${pokemon.habilidad}"
-        holder.textoTipo.text = pokemon.tipo
         holder.imagen.setImageResource(imagenDelTipo(pokemon.tipo))
 
         holder.itemView.setOnLongClickListener {
