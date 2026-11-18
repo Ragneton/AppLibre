@@ -7,9 +7,6 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.example.applibre.network.RetrofitClient
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,8 +19,6 @@ class MainActivity : AppCompatActivity() {
         val btnPokedex = findViewById<Button>(R.id.botonPokedex)
         val btnHistorial = findViewById<Button>(R.id.botonHistorial)
         val btnExplorar = findViewById<Button>(R.id.botonExplorarPokedex)
-
-        val dao = AppDatabase.obtener(this).pokemonDao()
 
         val prefs = getSharedPreferences("Nombres", MODE_PRIVATE)
         editNombre.setText(prefs.getString("Nombre_guardado", ""))
@@ -40,27 +35,11 @@ class MainActivity : AppCompatActivity() {
             } else {
                 prefs.edit().putString("Nombre_guardado", nombre).apply()
 
-                lifecycleScope.launch {
-                    dao.insertar(PokemonEntity(nombre = nombre, tipo = tipo, habilidad = habilidad))
-                }
-
                 val intent = Intent(this, SecondActivity::class.java)
                 intent.putExtra("Nombre", nombre)
                 intent.putExtra("Tipo", tipo)
                 intent.putExtra("Habilidad", habilidad)
                 startActivity(intent)
-            }
-        }
-
-        lifecycleScope.launch {
-            try {
-                val respuesta = RetrofitClient.api.obtenerPokemons(20,0)
-
-                for (pokemon in respuesta.results) {
-                    println(pokemon.name)
-                }
-            } catch (e: Exception) {
-                println("Error al conectar: ${e.message}")
             }
         }
 

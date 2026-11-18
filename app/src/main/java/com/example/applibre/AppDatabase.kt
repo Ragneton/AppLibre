@@ -20,7 +20,8 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "pokedex_db"
-                ).build()
+                ).fallbackToDestructiveMigration(dropAllTables = true).build()
+
                 instancia = nueva
                 nueva
             }
