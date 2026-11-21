@@ -6,15 +6,17 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
-import com.example.applibre.network.RetrofitClient
 import kotlinx.coroutines.launch
-import com.example.applibre.AppDatabase
-import com.example.applibre.PokemonApiEntity
 
 class PokemonDetalleActivity : AppCompatActivity() {
+
+    private val viewModel: PokemonDetalleViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,68 +28,51 @@ class PokemonDetalleActivity : AppCompatActivity() {
         val textoHabilidades = findViewById<TextView>(R.id.textoHabilidades)
         val textoAltura = findViewById<TextView>(R.id.textoAltura)
         val textoPeso = findViewById<TextView>(R.id.textoPeso)
-
         val imagen = findViewById<ImageView>(R.id.imagenDetalle)
         val progreso = findViewById<ProgressBar>(R.id.progresoDetalle)
         val textoError = findViewById<TextView>(R.id.textoErrorDetalle)
         val botonVolver = findViewById<Button>(R.id.botonVolverDetalle)
 
-        botonVolver.setOnClickListener {
-            finish()
-        }
+        botonVolver.setOnClickListener { finish() }
 
         val idPokemon = intent.getIntExtra("idPokemon", -1)
-
         if (idPokemon == -1) {
             textoError.visibility = View.VISIBLE
             return
         }
 
+        if (savedInstanceState == null) viewModel.cargar(idPokemon)
+
         lifecycleScope.launch {
-            progreso.visibility = View.VISIBLE
-            textoError.visibility = View.GONE
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.estado.collect { estado ->
+                    progreso.visibility =
+                        if (estado is EstadoDetalle.Cargando) View.VISIBLE else View.GONE
 
-            try {
-                val pokemon = RetrofitClient.api.obtenerDetalle(idPokemon)
-
-                textoNumero.text = "N.º ${pokemon.id}"
-                textoNombre.text = pokemon.nombre.replaceFirstChar {
-                    it.uppercase()
+                    when (estado) {
+                        is EstadoDetalle.Cargando -> textoError.visibility = View.GONE
+                        is EstadoDetalle.Error -> {
+                            textoError.text = "No se han podido cargar los datos"
+                            textoError.visibility = View.VISIBLE
+                        }
+                        is EstadoDetalle.Exito -> {
+                            val p = estado.pokemon
+                            if (estado.sinConexion) {
+                                textoError.text = "Sin conexión: mostrando datos guardados"
+                                textoError.visibility = View.VISIBLE
+                            } else {
+                                textoError.visibility = View.GONE
+                            }
+                            textoNumero.text = "N.º ${p.id}"
+                            textoNombre.text = p.nombre.replaceFirstChar { it.uppercase() }
+                            textoTipos.text = "Tipos: ${p.tipos}"
+                            textoHabilidades.text = "Habilidades: ${p.habilidades}"
+                            textoAltura.text = "Altura: ${p.altura / 10.0} m"
+                            textoPeso.text = "Peso: ${p.peso / 10.0} kg"
+                            Glide.with(this@PokemonDetalleActivity).load(p.imagen).into(imagen)
+                        }
+                    }
                 }
-
-                val tipos = pokemon.tipo.joinToString(", ") {
-                    it.tipo.nombre
-                }
-
-                textoTipos.text = "Tipos: $tipos"
-
-                val habilidades = pokemon.abilidades.joinToString(", ") {
-                    it.abilidad.nombre
-                }
-
-                textoHabilidades.text = "Habilidades: $habilidades"
-
-                textoAltura.text = "Altura: ${pokemon.altura / 10.0} m"
-                textoPeso.text = "Peso: ${pokemon.peso / 10.0} kg"
-
-                Glide.with(this@PokemonDetalleActivity).load(pokemon.sprites.front_default).into(imagen)
-
-                val pokemonGuardado = PokemonApiEntity(
-                    id = pokemon.id,
-                    nombre = pokemon.nombre,
-                    imagen = pokemon.sprites.front_default,
-                    tipos = tipos,
-                    habilidades = habilidades,
-                    altura = pokemon.altura,
-                    peso = pokemon.peso
-                )
-
-                AppDatabase.obtener(this@PokemonDetalleActivity).pokemonDao().insertarPokemonApi(pokemonGuardado)
-
-            } catch (e: Exception) {
-                textoError.visibility = View.VISIBLE
-            } finally {
-                progreso.visibility = View.GONE
             }
         }
     }

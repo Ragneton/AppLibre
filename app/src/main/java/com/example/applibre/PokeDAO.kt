@@ -12,16 +12,15 @@ interface PokeDAO {
     suspend fun insertar(pokemon: PokemonEntity)
 
     @Query("SELECT * FROM pokemons ORDER BY id DESC")
-    suspend fun obtenerTodas(): List<PokemonEntity>
+    suspend fun obtenerTodos(): List<PokemonEntity>
 
     @Delete
     suspend fun borrar(pokemon: PokemonEntity)
 
-    // Pokémon descargados de PokéAPI
+    // Pokémon descargados desde la PokéAPI
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertarPokemonApi(pokemon: PokemonApiEntity)
 
     @Query("SELECT * FROM pokemons_api WHERE id = :id")
     suspend fun obtenerPokemonApi(id: Int): PokemonApiEntity?
-}
 }

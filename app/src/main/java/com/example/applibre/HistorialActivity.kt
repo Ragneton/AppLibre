@@ -31,7 +31,7 @@ class HistorialActivity : AppCompatActivity() {
 
     private fun cargarLista() {
         lifecycleScope.launch {
-            val lista = dao.obtenerTodas()
+            val lista = dao.obtenerTodos()
             recycler.adapter = HistorialAdapter(lista) { pokemon ->
                 lifecycleScope.launch {
                     dao.borrar(pokemon)

@@ -7,6 +7,8 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +21,9 @@ class MainActivity : AppCompatActivity() {
         val btnPokedex = findViewById<Button>(R.id.botonPokedex)
         val btnHistorial = findViewById<Button>(R.id.botonHistorial)
         val btnExplorar = findViewById<Button>(R.id.botonExplorarPokedex)
+
+        // Para el tema de guardar los pokemon
+        val dao = AppDatabase.obtener(this).pokemonDao()
 
         val prefs = getSharedPreferences("Nombres", MODE_PRIVATE)
         editNombre.setText(prefs.getString("Nombre_guardado", ""))
@@ -34,6 +39,10 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Escribe la habilidad del pokemon", Toast.LENGTH_SHORT).show()
             } else {
                 prefs.edit().putString("Nombre_guardado", nombre).apply()
+
+                lifecycleScope.launch {
+                    dao.insertar(PokemonEntity(nombre = nombre, tipo = tipo, habilidad = habilidad))
+                }
 
                 val intent = Intent(this, SecondActivity::class.java)
                 intent.putExtra("Nombre", nombre)

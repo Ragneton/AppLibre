@@ -1,27 +1,29 @@
 package com.example.applibre.network
 
+import com.google.gson.annotations.SerializedName
+
 data class PokemonDetalle(
     val id: Int,
-    val nombre: String,
-    val altura: Int,
-    val peso: Int,
-    val tipo: List<TipoPokemon>,
-    val abilidades: List<HabilidadPokemon>,
+    @SerializedName("name") val nombre: String,
+    @SerializedName("height") val altura: Int,
+    @SerializedName("weight") val peso: Int,
+    @SerializedName("types") val tipo: List<TipoPokemon>,
+    @SerializedName("abilities") val abilidades: List<HabilidadPokemon>,
     val sprites: SpritesPokemon
 )
 
 data class TipoPokemon(
-    val tipo: NombrePokemon
+    @SerializedName("type") val tipo: NombrePokemon
 )
 
 data class HabilidadPokemon(
-    val abilidad: NombrePokemon
+    @SerializedName("ability") val abilidad: NombrePokemon
 )
 
 data class NombrePokemon(
-    val nombre: String
+    @SerializedName("name") val nombre: String
 )
 
 data class SpritesPokemon(
-    val front_default: String?
+    @SerializedName("front_default") val front_default: String?
 )
