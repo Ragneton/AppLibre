@@ -7,10 +7,11 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
+import androidx.activity.viewModels
 
 class MainActivity : AppCompatActivity() {
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,9 +22,6 @@ class MainActivity : AppCompatActivity() {
         val btnPokedex = findViewById<Button>(R.id.botonPokedex)
         val btnHistorial = findViewById<Button>(R.id.botonHistorial)
         val btnExplorar = findViewById<Button>(R.id.botonExplorarPokedex)
-
-        // Para el tema de guardar los pokemon
-        val dao = AppDatabase.obtener(this).pokemonDao()
 
         val prefs = getSharedPreferences("Nombres", MODE_PRIVATE)
         editNombre.setText(prefs.getString("Nombre_guardado", ""))
@@ -40,9 +38,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 prefs.edit().putString("Nombre_guardado", nombre).apply()
 
-                lifecycleScope.launch {
-                    dao.insertar(PokemonEntity(nombre = nombre, tipo = tipo, habilidad = habilidad))
-                }
+                viewModel.guardar(nombre, tipo, habilidad)
 
                 val intent = Intent(this, SecondActivity::class.java)
                 intent.putExtra("Nombre", nombre)

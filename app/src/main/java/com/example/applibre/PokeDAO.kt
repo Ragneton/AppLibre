@@ -23,4 +23,7 @@ interface PokeDAO {
 
     @Query("SELECT * FROM pokemons_api WHERE id = :id")
     suspend fun obtenerPokemonApi(id: Int): PokemonApiEntity?
+
+    @Query("SELECT * FROM pokemons_api ORDER BY id")
+    suspend fun obtenerTodosApi(): List<PokemonApiEntity>
 }

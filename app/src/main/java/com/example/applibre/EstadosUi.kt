@@ -2,7 +2,7 @@ package com.example.applibre
 
 import com.example.applibre.network.PokemonResumen
 
-// Una ealed class es una lista cerrada de cualquier situacion posible
+// Una sealed class es una lista cerrada de cualquier situacion posible
 // Así la pantalla solo tiene que reaccionar a "cargando", "éxito" o "error".
 sealed class EstadoLista {
     object Cargando : EstadoLista()

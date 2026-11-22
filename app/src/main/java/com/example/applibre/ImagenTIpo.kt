@@ -1,11 +1,5 @@
 package com.example.applibre
 
-data class Pokemon(val nombre: String, val tipo: String, val imagen: Int)
-
-object Pokedex {
-    val pokemons = mutableListOf<Pokemon>()
-}
-
 fun imagenDelTipo(tipo: String): Int = when (tipo) {
     "Normal" -> R.drawable.normal
     "Fuego" -> R.drawable.fuego

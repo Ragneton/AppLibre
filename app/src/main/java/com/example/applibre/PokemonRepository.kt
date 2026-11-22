@@ -15,7 +15,7 @@ class PokemonRepository(
         return try {
             Resultado(api.obtenerPokemons(20, 0).results, sinConexion = false)
         } catch (e: Exception) {
-            val guardados = dao.obtenerTodos().map {
+            val guardados = dao.obtenerTodosApi().map {
                 PokemonResumen(it.nombre, "https://pokeapi.co/api/v2/pokemon/${it.id}/")
             }
             if (guardados.isEmpty()) throw e      // no hay nada que enseñar
@@ -42,4 +42,11 @@ class PokemonRepository(
             Resultado(guardado, sinConexion = true)
         }
     }
+
+    // Historial: los Pokémon que el usuario añade desde el formulario
+    suspend fun obtenerHistorial(): List<PokemonEntity> = dao.obtenerTodos()
+
+    suspend fun guardarEnHistorial(pokemon: PokemonEntity) = dao.insertar(pokemon)
+
+    suspend fun borrarDelHistorial(pokemon: PokemonEntity) = dao.borrar(pokemon)
 }

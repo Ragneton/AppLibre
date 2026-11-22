@@ -27,6 +27,7 @@ class HistorialAdapter(
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val pokemon = pokemons[position]
         holder.textoNombre.text = pokemon.nombre
+        holder.textoTipo.text = pokemon.tipo
         holder.textoHabilidad.text = "Habilidad: ${pokemon.habilidad}"
         holder.imagen.setImageResource(imagenDelTipo(pokemon.tipo))
 
