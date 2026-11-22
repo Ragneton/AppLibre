@@ -3,6 +3,9 @@ package com.example.applibre
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.applibre.data.AppDatabase
+import com.example.applibre.data.PokemonEntity
+import com.example.applibre.data.PokemonRepository
 import com.example.applibre.network.RetrofitClient
 import kotlinx.coroutines.launch
 

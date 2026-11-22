@@ -1,4 +1,4 @@
-package com.example.applibre
+package com.example.applibre.data
 
 import android.content.Context
 import androidx.room.Database

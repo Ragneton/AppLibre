@@ -1,4 +1,4 @@
-package com.example.applibre
+package com.example.applibre.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

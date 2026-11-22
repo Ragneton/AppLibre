@@ -1,5 +1,6 @@
 package com.example.applibre
 
+import com.example.applibre.data.PokemonApiEntity
 import com.example.applibre.network.PokemonResumen
 
 // Una sealed class es una lista cerrada de cualquier situacion posible

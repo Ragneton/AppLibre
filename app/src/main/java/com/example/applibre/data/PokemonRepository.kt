@@ -1,4 +1,4 @@
-package com.example.applibre
+package com.example.applibre.data
 
 import com.example.applibre.network.PokemonApi
 import com.example.applibre.network.PokemonResumen
