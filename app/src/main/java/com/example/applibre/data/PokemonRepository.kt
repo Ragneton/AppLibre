@@ -26,6 +26,10 @@ class PokemonRepository(
     suspend fun obtenerDetalle(id: Int): Resultado<PokemonApiEntity> {
         return try {
             val p = api.obtenerDetalle(id)
+
+            // Tema de la mejora, para ver si el pokemon ya estaba en favorito
+            val eraFavorito = dao.obtenerPokemonApi(id)?.esFavorito ?: false
+
             val entidad = PokemonApiEntity(
                 id = p.id,
                 nombre = p.nombre,
@@ -33,7 +37,8 @@ class PokemonRepository(
                 tipos = p.tipo.joinToString(", ") { it.tipo.nombre },
                 habilidades = p.abilidades.joinToString(", ") { it.abilidad.nombre },
                 altura = p.altura,
-                peso = p.peso
+                peso = p.peso,
+                esFavorito = eraFavorito
             )
             dao.insertarPokemonApi(entidad)
             Resultado(entidad, sinConexion = false)
@@ -49,4 +54,12 @@ class PokemonRepository(
     suspend fun guardarEnHistorial(pokemon: PokemonEntity) = dao.insertar(pokemon)
 
     suspend fun borrarDelHistorial(pokemon: PokemonEntity) = dao.borrar(pokemon)
+
+    // Mejora favorito
+    suspend fun cambiarFavorito(id: Int, favorito: Boolean) = dao.marcarFavorito(id, favorito)
+
+    suspend fun obtenerFavoritos(): List<PokemonResumen> =
+        dao.obtenerFavoritos().map {
+            PokemonResumen(it.nombre, "https://pokeapi.co/api/v2/pokemon/${it.id}/")
+        }
 }

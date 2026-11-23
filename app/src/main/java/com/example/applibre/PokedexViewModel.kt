@@ -35,4 +35,16 @@ class PokedexViewModel(application: Application) : AndroidViewModel(application)
             }
         }
     }
+
+    // Mejora, esto hace que cuando se narque la casilla de favoritos solo se muestren los favoritos
+    fun mostrarFavoritos(soloFavoritos: Boolean) {
+        if (!soloFavoritos) {
+            cargar()
+            return
+        }
+        _estado.value = EstadoLista.Cargando
+        viewModelScope.launch {
+            _estado.value = EstadoLista.Exito(repositorio.obtenerFavoritos(), sinConexion = false)
+        }
+    }
 }

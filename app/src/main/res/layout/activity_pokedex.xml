@@ -28,6 +28,12 @@
         android:text="No se han podido cargar los Pokémon"
         android:visibility="gone" />
 
+    <CheckBox
+        android:id="@+id/checkFavoritos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solo favoritos" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerPokedex"
         android:layout_width="match_parent"

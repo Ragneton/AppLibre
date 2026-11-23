@@ -15,11 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applibre.network.PokemonResumen
 import kotlinx.coroutines.launch
+import android.widget.CheckBox
 
 class PokedexActivity : AppCompatActivity() {
 
     private val viewModel: PokedexViewModel by viewModels()
     private lateinit var recycler: RecyclerView
+    private lateinit var checkFavoritos: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,11 @@ class PokedexActivity : AppCompatActivity() {
         val progreso = findViewById<ProgressBar>(R.id.progresoPokedex)
         val textoError = findViewById<TextView>(R.id.textoErrorPokedex)
         val botonVolver = findViewById<Button>(R.id.botonVolverPokedex)
+
+        checkFavoritos = findViewById(R.id.checkFavoritos)
+        checkFavoritos.setOnCheckedChangeListener { _, marcado ->
+            viewModel.mostrarFavoritos(marcado)
+        }
 
         recycler.layoutManager = LinearLayoutManager(this)
         botonVolver.setOnClickListener { finish() }

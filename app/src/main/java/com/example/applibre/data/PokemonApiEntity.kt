@@ -14,5 +14,7 @@ data class PokemonApiEntity(
     val tipos: String,
     val habilidades: String,
     val altura: Int,
-    val peso: Int
+    val peso: Int,
+    // Parte de la mejora, Favorito
+    val esFavorito: Boolean = false
 )

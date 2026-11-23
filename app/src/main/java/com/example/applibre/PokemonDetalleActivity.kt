@@ -32,8 +32,15 @@ class PokemonDetalleActivity : AppCompatActivity() {
         val progreso = findViewById<ProgressBar>(R.id.progresoDetalle)
         val textoError = findViewById<TextView>(R.id.textoErrorDetalle)
         val botonVolver = findViewById<Button>(R.id.botonVolverDetalle)
+        val botonFavorito = findViewById<Button>(R.id.botonFavorito)
 
-        botonVolver.setOnClickListener { finish() }
+        botonFavorito.setOnClickListener {
+            viewModel.alternarFavorito()
+        }
+
+        botonVolver.setOnClickListener {
+            finish()
+        }
 
         val idPokemon = intent.getIntExtra("idPokemon", -1)
         if (idPokemon == -1) {
@@ -70,6 +77,11 @@ class PokemonDetalleActivity : AppCompatActivity() {
                             textoAltura.text = "Altura: ${p.altura / 10.0} m"
                             textoPeso.text = "Peso: ${p.peso / 10.0} kg"
                             Glide.with(this@PokemonDetalleActivity).load(p.imagen).into(imagen)
+
+                            // Mejora
+                            botonFavorito.visibility = View.VISIBLE
+                            botonFavorito.text =
+                                if (p.esFavorito) "★ Quitar de favoritos" else "☆ Añadir a favoritos"
                         }
                     }
                 }

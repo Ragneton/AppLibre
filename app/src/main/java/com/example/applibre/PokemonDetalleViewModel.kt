@@ -30,4 +30,15 @@ class PokemonDetalleViewModel(application: Application) : AndroidViewModel(appli
             }
         }
     }
+
+    // Funcion para alternar el favorito
+    fun alternarFavorito() {
+        val actual = _estado.value as? EstadoDetalle.Exito ?: return
+        val nuevo = !actual.pokemon.esFavorito
+
+        viewModelScope.launch {
+            repositorio.cambiarFavorito(actual.pokemon.id, nuevo)
+            _estado.value = actual.copy(pokemon = actual.pokemon.copy(esFavorito = nuevo))
+        }
+    }
 }
