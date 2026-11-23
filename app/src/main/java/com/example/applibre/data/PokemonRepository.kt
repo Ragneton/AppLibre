@@ -13,7 +13,7 @@ class PokemonRepository(
 
     suspend fun obtenerLista(): Resultado<List<PokemonResumen>> {
         return try {
-            Resultado(api.obtenerPokemons(20, 0).results, sinConexion = false)
+            Resultado(api.obtenerPokemons(151, 0).results, sinConexion = false)
         } catch (e: Exception) {
             val guardados = dao.obtenerTodosApi().map {
                 PokemonResumen(it.nombre, "https://pokeapi.co/api/v2/pokemon/${it.id}/")
