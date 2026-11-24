@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.AppLibre" parent="Theme.AppCompat.DayNight.NoActionBar" />
+    <style name="Theme.AppLibre" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Todos los Button de la app usan este estilo sin tocar sus layouts -->
+        <item name="buttonStyle">@style/BotonPokedex</item>
+        <!-- Color de casillas, barras de carga, etc. -->
+        <item name="colorAccent">@color/pokedex_indigo</item>
+        <item name="colorControlActivated">@color/pokedex_indigo</item>
+    </style>
+
+    <style name="BotonPokedex" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/boton_redondeado</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="BotonSecundario" parent="BotonPokedex">
+        <item name="android:background">@drawable/boton_secundario</item>
+        <item name="android:textColor">@color/pokedex_indigo</item>
+    </style>
+
+    <style name="BotonAcento" parent="BotonPokedex">
+        <item name="android:background">@drawable/boton_fav</item>
+        <item name="android:textColor">@color/pokedex_indigo_oscuro</item>
+    </style>
 
 </resources>

@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="pokedex_indigo">#4A3FA8</color>
+    <color name="pokedex_indigo_oscuro">#1B1545</color>
+    <color name="pokedex_amarillo">#F2C200</color>
+    <color name="pokedex_rojo">#E5533D</color>
+    <color name="fondo_app">#EEEDFA</color>
 </resources>
